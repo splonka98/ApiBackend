@@ -15,6 +15,7 @@ namespace DogCalApi.Models
         [Required]
         [StringLength(25)]
         public string name { get; set; }
+
         [Column("Age")]
         [Required]
         public int age { get; set; }

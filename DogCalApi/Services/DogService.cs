@@ -1,18 +1,33 @@
 ﻿using DogCalApi.Models.ModelEnums;
+using System.Security.Cryptography.Xml;
+using DogCalApi.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace DogCalApi.Services
 {
-    public class DogService 
+    public class DogService
     {
-        public void AddAnimal()
+        
+        public bool AddAnimal(string name, int age, string gender, double weight, DogActivity activityLevel)
         {
-
+            try
+            {
+                DogModel newDog = new DogModel(name, age, gender, weight, activityLevel);
+                newDog.activityFactor=ChoseDogActivityFactor(activityLevel);
+            }
+            catch 
+            {
+                return false;
+            }
+            return true;
         }
-        public void CalculateAnimalCalories()
+        public int CalculateAnimalCalories(double weight, double activityFactor)
         {
-
+            return (int)(70 * Math.Pow(weight,0.75)*activityFactor);
         }
-        public double ChoseDogActivityLevel(DogActivity dogActivity)
+        public double ChoseDogActivityFactor(DogActivity dogActivity)
         {
             switch (dogActivity)
             {
