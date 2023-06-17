@@ -1,9 +1,5 @@
 ﻿using DogCalApi.Models.ModelEnums;
-using System.Security.Cryptography.Xml;
 using DogCalApi.Models;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Reflection;
-using System.Xml.Linq;
 
 namespace DogCalApi.Services
 {
@@ -14,7 +10,7 @@ namespace DogCalApi.Services
         {
             try
             {
-                DogModel newDog = new DogModel(name, age, gender, weight, activityLevel);
+                Dog newDog = new Dog(name, age, gender, weight, activityLevel);
                 newDog.activityFactor=ChoseDogActivityFactor(activityLevel);
             }
             catch 
