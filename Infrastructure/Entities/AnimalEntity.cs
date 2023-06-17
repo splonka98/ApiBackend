@@ -1,11 +1,12 @@
-﻿using DogCalApi.Models.ModelEnums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DogCalApi.Models
+namespace Infrastructure.Entities
 {
-    
-    public abstract class AnimalModel
+    internal abstract class AnimalEntity
     {
         public int animalId { get; set; }
 
@@ -20,6 +21,5 @@ namespace DogCalApi.Models
         public double activityFactor { get; set; }
 
         public virtual int ownerId { get; set; }
-
     }
 }

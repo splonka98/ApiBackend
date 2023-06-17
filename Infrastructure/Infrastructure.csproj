@@ -8,6 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppCore\AppCore.csproj" />
-  </ItemGroup>
+  </ItemGroup>                
 
 </Project>
