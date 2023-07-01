@@ -1,25 +1,25 @@
-﻿using DogCalApi.Models.ModelEnums;
+﻿using AppCore.Models.ModelEnums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DogCalApi.Models
+namespace AppCore.Models
 {
     public class Dog
     {
-        public int animalId { get; set; }
+        public int Id { get; set; }
 
-        public string name { get; set; }
+        public string Name { get; set; }
 
-        public int age { get; set; }
+        public int Age { get; set; }
 
-        public string gender { get; set; }
+        public string Gender { get; set; }
 
-        public double weight { get; set; }
+        public double Weight { get; set; }
 
-        public double activityFactor { get; set; }
+        public double ActivityFactor { get; set; }
 
-        public virtual int ownerId { get; set; }
-        public DogActivity activityLevel { get; set; }
+        public int OwnerId { get; set; }
+        public DogActivity ActivityLevel { get; set; }
         
     }
 }

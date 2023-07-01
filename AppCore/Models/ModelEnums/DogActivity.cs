@@ -1,4 +1,4 @@
-﻿namespace DogCalApi.Models.ModelEnums
+﻿namespace AppCore.Models.ModelEnums
 {
     public enum DogActivity
     {

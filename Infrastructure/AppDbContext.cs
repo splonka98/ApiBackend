@@ -12,7 +12,7 @@ namespace Infrastructure
     public class AppDbContext : DbContext
     {
         private string _connectionString =
-            "Server=(localdb)\\mssqllocaldb;Database=DogCallApi;Trusted_Connection=True;";
+            "Server=(localdb)\\mssqllocaldb;Database=DogCalDb;Trusted_Connection=True;";
         public DbSet<DogEntity> Dogs { get; set; }
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<AddressEntity> Address { get; set; }
@@ -50,12 +50,10 @@ namespace Infrastructure
                 .Property(e => e.HouseNumber)
                 .IsRequired();
             modelBuilder.Entity<AddressEntity>()
-                .Property(e => e.FlatNumber);
-            modelBuilder.Entity<AddressEntity>()
                 .Property(e => e.PostalCode)
                 .IsRequired();
             modelBuilder.Entity<AddressEntity>()
-                .Property(e => e.UserId)
+                .Property(e => e.Id)
                 .IsRequired();
 
             modelBuilder.Entity<UserEntity>()
@@ -69,6 +67,10 @@ namespace Infrastructure
             modelBuilder.Entity<UserEntity>()
                 .Property(u => u.Email)
                 .IsRequired();
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
         }
     }
 }

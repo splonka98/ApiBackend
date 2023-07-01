@@ -1,5 +1,5 @@
-﻿using DogCalApi.Models;
-using DogCalApi.Models.ModelEnums;
+﻿using AppCore.Models;
+using AppCore.Models.ModelEnums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

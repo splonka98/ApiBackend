@@ -8,7 +8,7 @@ namespace Infrastructure.Entities
 {
     public class DogEntity
     {
-        public int AnimalId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

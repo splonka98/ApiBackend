@@ -1,5 +1,5 @@
-﻿using DogCalApi.Models.ModelEnums;
-using DogCalApi.Models;
+﻿using AppCore.Models.ModelEnums;
+using AppCore.Models;
 
 namespace DogCalApi.Services
 {
@@ -10,8 +10,8 @@ namespace DogCalApi.Services
         {
             try
             {
-                Dog newDog = new Dog(name, age, gender, weight, activityLevel);
-                newDog.activityFactor=ChoseDogActivityFactor(activityLevel);
+                Dog newDog = new Dog();
+                newDog.ActivityFactor=ChoseDogActivityFactor(activityLevel);
             }
             catch 
             {

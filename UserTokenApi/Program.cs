@@ -1,3 +1,6 @@
+using AppCore.Models;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,9 +9,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 var app = builder.Build();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

@@ -1,6 +1,8 @@
-﻿namespace DogCalApi.Services
+﻿using AppCore.Interfaces.UserService;
+
+namespace DogCalApi.Services
 {
-    public class UserService
+    public class UserService: IUserService
     {
         public void CreateAccount()
         { 

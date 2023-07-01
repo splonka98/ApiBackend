@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace AppCore.Interfaces.UserService
 {
-    internal interface IUserService
+    public interface IUserService
     {
-        void RegisterUser();
+        public void CreateAccount();
+
+        public void AddDog();
+
+        public void EditDog();
+
+        public void RemoveDog();
     }
 }
