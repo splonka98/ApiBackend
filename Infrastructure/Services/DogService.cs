@@ -1,24 +1,43 @@
 ﻿using AppCore.Models.ModelEnums;
 using AppCore.Models;
+using Infrastructure.Entities;
+using AppCore.Interfaces.DogService;
+using System.Diagnostics;
 
 namespace DogCalApi.Services
 {
-    public class DogService
+    public class DogService: IDogService
+
     {
-        
-        public bool AddAnimal(string name, int age, string gender, double weight, DogActivity activityLevel)
+        private double factor;
+
+        public DogEntity AddAnimal(Dog dog)
         {
-            try
+            return new DogEntity()
             {
-                Dog newDog = new Dog();
-                newDog.ActivityFactor=ChoseDogActivityFactor(activityLevel);
-            }
-            catch 
-            {
-                return false;
-            }
-            return true;
+                Name = dog.Name,
+                Age = dog.Age,
+                Gender = dog.Gender,
+                Weight = dog.Weight,
+                ActivityFactor = dog.ActivityFactor,
+            };
         }
+
+        public Dog AddDog(string name, int age, string gender, double weight, int activity, int ownerId)
+        {
+            return new Dog()
+            {
+                Name = name,
+                Age = age,
+                Gender = gender,
+                Weight = weight,
+                ActivityLevel = activity,
+                ActivityFactor = ChoseDogActivityFactor(GetActivityFromInt(activity)),
+                CaloricNeed = CalculateAnimalCalories(weight, ChoseDogActivityFactor(GetActivityFromInt(activity))),
+                OwnerId = ownerId
+            };
+        }
+
         public int CalculateAnimalCalories(double weight, double activityFactor)
         {
             return (int)(70 * Math.Pow(weight,0.75)*activityFactor);
@@ -55,6 +74,40 @@ namespace DogCalApi.Services
                     return 2.5;
                 default:
                     return 1;
+            }
+        }
+        private DogActivity GetActivityFromInt(int activity)
+    {
+            switch (activity)
+            {
+                case 0:
+                    return DogActivity.unneuteredAdult_Or_PregnancyFirstTwoTrimesters_Or_AdultUnneutered;
+                case 1:
+                    return DogActivity.neuteredAdult;
+                case 2:
+                    return DogActivity.overweightLowActivity;
+                case 3:
+                    return DogActivity.obesityTreatment_Or_IntensiveNutritionTherapy;
+                case 4:
+                    return DogActivity.weightGainRecovery;
+                case 5:
+                    return DogActivity.workingTrainingLight;
+                case 6:
+                    return DogActivity.pregnancyLastTrimester_Or_LactationOnePuppy_Or_WorkingTrainingModerate_Or_GrowthFourToFiveMonths;
+                case 7:
+                    return DogActivity.lactationTwoPuppies;
+                case 8:
+                    return DogActivity.lactationThreeToFourPuppies_Or_WorkingTrainingHeavy;
+                case 9:
+                    return DogActivity.lactationFiveToSixPuppies;
+                case 10:
+                    return DogActivity.lactationSevenToEightPuppies;
+                case 11:
+                    return DogActivity.lactationNineOrMorePuppies;
+                case 12:
+                    return DogActivity.growthEightToTwelveMonths;
+                default:
+                    return DogActivity.overweightLowActivity;
             }
         }
     }

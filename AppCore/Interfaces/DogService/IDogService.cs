@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace AppCore.Interfaces.DogService
 {
-    internal interface IDogService
+    public interface IDogService
     {
-        public Dog AddAnimal(string name, int age, string gender, double weight, DogActivity activity );
+        public Dog AddDog(string name, int age, string gender, double weight, int activity , int ownerId);
         public int CalculateAnimalCalories(double weight, double activityFactor);
         public double ChoseDogActivityFactor(DogActivity dogActivity);
     }

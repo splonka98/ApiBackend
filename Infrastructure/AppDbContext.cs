@@ -37,6 +37,8 @@ namespace Infrastructure
             modelBuilder.Entity<DogEntity>()
                 .Property(e => e.ActivityFactor)
                 .IsRequired();
+            modelBuilder.Entity<DogEntity>()
+                .Property(e => e.OwnerId);
 
             modelBuilder.Entity<AddressEntity>()
                 .Property(e => e.City)
