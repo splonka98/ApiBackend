@@ -5,7 +5,7 @@ using Infractructure;
 
 namespace DogCalApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class DogController : ControllerBase
     {
@@ -17,9 +17,9 @@ namespace DogCalApi.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateEdit (Dog dog)
+        public JsonResult CreateEdit(Dog dog)
         {
-            if (dog.Id==0)
+            if (dog.Id == 0)
             {
                 _context.Dogs.Add(dog);
 
@@ -46,6 +46,26 @@ namespace DogCalApi.Controllers
 
             if (result == null)
                 return new JsonResult(NotFound());
+
+            return new JsonResult(Ok(result));
+        }
+
+        [HttpDelete]
+        public JsonResult Delete(int id)
+        {
+            var result = _context.Dogs.Find(id);
+            if (result == null)
+                return new JsonResult(NotFound());
+            _context.Dogs.Remove(result);
+            _context.SaveChanges();
+
+            return new JsonResult(NoContent());
+        }
+
+        [HttpGet]
+        public JsonResult GetAll()
+        {
+            var result = _context.Dogs.ToList();
 
             return new JsonResult(Ok(result));
         }
