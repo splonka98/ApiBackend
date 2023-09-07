@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Infractructure;
-
+using AppCore.Interfaces;
+using Infractructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IDogService, DogService>();
 
 var app = builder.Build();
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using AppCore.Models;
 using Infractructure;
+using AppCore.Interfaces;
 
 namespace DogCalApi.Controllers
 {
@@ -10,15 +11,17 @@ namespace DogCalApi.Controllers
     public class DogController : ControllerBase
     {
         private readonly ApiDbContext _context;
-
-        public DogController(ApiDbContext context)
+        private readonly IDogService _dogService;
+        public DogController(ApiDbContext context, IDogService dogService)
         {
             _context = context;
+            _dogService = dogService;
         }
 
         [HttpPost]
         public JsonResult CreateEdit(Dog dog)
         {
+            _dogService.CalculateCalories(dog);
             if (dog.Id == 0)
             {
                 _context.Dogs.Add(dog);
