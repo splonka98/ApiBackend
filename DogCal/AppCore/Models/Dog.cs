@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace AppCore.Models
 {
-    public class Role
+    public class Dog
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Weight { get; set; }
+        public int? CalorieNeed { get; set; }
+
     }
 }

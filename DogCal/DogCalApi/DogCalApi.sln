@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogCalApi", "DogCalApi.csproj", "{3CF4922A-70E2-4144-A1FF-001F8C34A979}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppCore", "..\AppCore\AppCore.csproj", "{95C09307-08ED-4769-BBDE-5A6C8DD31B5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infractructure", "..\Infractructure\Infractructure.csproj", "{2BE3DF75-285A-4AB0-B1A9-4B055BA0664E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CF4922A-70E2-4144-A1FF-001F8C34A979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF4922A-70E2-4144-A1FF-001F8C34A979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF4922A-70E2-4144-A1FF-001F8C34A979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF4922A-70E2-4144-A1FF-001F8C34A979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95C09307-08ED-4769-BBDE-5A6C8DD31B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C09307-08ED-4769-BBDE-5A6C8DD31B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95C09307-08ED-4769-BBDE-5A6C8DD31B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95C09307-08ED-4769-BBDE-5A6C8DD31B5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE3DF75-285A-4AB0-B1A9-4B055BA0664E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE3DF75-285A-4AB0-B1A9-4B055BA0664E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE3DF75-285A-4AB0-B1A9-4B055BA0664E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE3DF75-285A-4AB0-B1A9-4B055BA0664E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73EEB989-D719-4DBE-B10A-24BE3C73C601}
+	EndGlobalSection
+EndGlobal
