@@ -13,5 +13,6 @@ namespace Infractructure.Entities
         public int Weight { get; set; }
         public int ActivityLevel { get; set; }
         public int? CalorieNeed { get; set; }
+        public int OwnerId { get; set; }
     }
 }

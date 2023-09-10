@@ -9,6 +9,7 @@ namespace AppCore.Interfaces
 {
     public interface IDogService
     {
+        public Dog AddOrEditDog(int dogId, string name, int weight, int activityLevel, int ownerId);
         public void CalculateCalories(Dog dog);
     }
 }

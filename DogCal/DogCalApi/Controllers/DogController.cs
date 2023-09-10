@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using AppCore.Models;
 using Infractructure;
 using AppCore.Interfaces;
+using DogCalApi.Dtos;
 
 namespace DogCalApi.Controllers
 {
@@ -19,8 +20,9 @@ namespace DogCalApi.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateEdit(Dog dog)
+        public JsonResult CreateEdit(AddEditDogDto dogDto)
         {
+            Dog dog = _dogService.AddOrEditDog(dogDto.Id, dogDto.Name, dogDto.Weight, dogDto.ActivityLevel, dogDto.OwnerId);
             _dogService.CalculateCalories(dog);
             if (dog.Id == 0)
             {

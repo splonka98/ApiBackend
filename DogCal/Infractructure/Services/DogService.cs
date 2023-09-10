@@ -11,6 +11,18 @@ namespace Infractructure.Services
 {
     public class DogService : IDogService
     {
+        public Dog AddOrEditDog(int dogId, string name, int weight, int activityLevel, int ownerId)
+        {
+            return new Dog()
+            {
+                Id = dogId,
+                Name = name,
+                Weight = weight,
+                ActivityLevel = activityLevel,
+                OwnerId = ownerId
+            };
+        }
+
         public void CalculateCalories(Dog dog)
         {
             dog.CalorieNeed = (int)(70 * Math.Pow(dog.Weight, 0.75) * ChoseDogActivityFactor(GetActivityFromInt(dog.ActivityLevel)));
