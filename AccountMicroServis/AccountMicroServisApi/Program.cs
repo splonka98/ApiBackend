@@ -1,5 +1,8 @@
+using AppCore.Interfaces;
 using Infrastructure;
+using Infrastructure.Mappers;
 using Infrastructure.Seeders;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApiDbContext>();
 builder.Services.AddScoped<AccountSeeder>();
+builder.Services.AddScoped<AccountMapper>();
+builder.Services.AddScoped<IAccountService,AccountService>();
 
 
 var app = builder.Build();

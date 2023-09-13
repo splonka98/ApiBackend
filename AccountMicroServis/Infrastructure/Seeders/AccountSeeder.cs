@@ -25,7 +25,7 @@ namespace Infrastructure.Seeders
 
                 if (!_dbContext.Roles.Any())
                 {
-                    IEnumerable<Role> roles = GetRoles();
+                    IEnumerable<RoleEntitie> roles = GetRoles();
                     _dbContext.Roles.AddRange(roles);
                     _dbContext.SaveChanges();
                 }
@@ -38,44 +38,44 @@ namespace Infrastructure.Seeders
                 }
             }
         }
-        private IEnumerable<Role> GetRoles()
+        private IEnumerable<RoleEntitie> GetRoles()
         {
-            var roles = new List<Role>()
+            var roles = new List<RoleEntitie>()
             {
-                new Role()
+                new RoleEntitie()
                 {
-                    Name = "Admin"
+                    RoleName = "Admin"
                 },
-                new Role()
+                new RoleEntitie()
                 {
-                    Name = "User"
+                    RoleName = "User"
                 },
             };
 
             return roles;
         }
-        private IEnumerable<User> GetUsers()
+        private IEnumerable<UserEntitie> GetUsers()
         {
-            var users = new List<User>()
+            var users = new List<UserEntitie>()
             {
-                new User()
+                new UserEntitie()
                 {
                     
                     Email="test1@gmail.com",
                     FirstName="Szymon",
                     LastName="Plonka",
                     Password="Admin123",
-                    RoleId=0
+                    RoleId=1
 
     },
-                new User()
+                new UserEntitie()
                 {
                    
                     Email="test2@gmail.com",
                     FirstName="Pymon",
                     LastName="Szonka",
                     Password="User123",
-                    RoleId=1
+                    RoleId=2
                 }
             };
 

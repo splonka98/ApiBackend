@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppCore.Models
+namespace Infrastructure.Entities
 {
-    public class Role
+    public class RoleEntitie
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        [Key]
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
     }
 }
