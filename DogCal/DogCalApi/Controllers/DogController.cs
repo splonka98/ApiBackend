@@ -18,44 +18,44 @@ namespace DogCalApi.Controllers
     {
         private readonly ApiDbContext _context;
         private readonly IDogService _dogService;
-        private string[] _claims;
-        HttpClient _client;
-        public DogController(ApiDbContext context, IDogService dogService, HttpClient client)
+        public DogController(ApiDbContext context, IDogService dogService)
         {
             _context = context;
             _dogService = dogService;
-            _client = client;
         }
         [Authorize]
         [HttpGet]
-        public JsonResult SecuredEndpoint(string token)
+        public JsonResult SecuredEndpoint()
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var readenToken = tokenHandler.ReadToken(token);
-            if (readenToken == null) return new JsonResult(NotFound());
-            
-            // Pobierz konkretny claim na podstawie jego typu (nazwy).
-            var nameIdentifierClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
-            // Jeśli dotarliśmy do tego miejsca, to token jest poprawny.
-            // Kod, który dostarcza chronione dane.
-            return new JsonResult(Ok(token));
+            return new JsonResult(Ok("User Authorized"));
         }
         [Authorize]
         [HttpPost]
         public JsonResult CreateEdit(AddEditDogDto dogDto)
         {
             var userClaims = User.Claims.ToList();
-            var userId= User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-            Dog dog = _dogService.AddOrEditDog(dogDto.Id, dogDto.Name, dogDto.Weight, dogDto.ActivityLevel, dogDto.OwnerId);
-            _dogService.CalculateCalories(dog);
-            if (dog.Id == 0)
+            var userNameClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).ToString();
+            int userId = userNameClaim[userNameClaim.Length - 1] - '0';
+            var usersDogs = _context.Dogs.ToList().Where(e => e.OwnerId == userId);
+
+            var IsDogInDb = usersDogs.Where(e => e.Name == dogDto.Name).Any();
+
+
+            Dog dog = new Dog();
+            
+            if (!IsDogInDb)
             {
+                dog =_dogService.AddOrEditDog(dogDto.Id, dogDto.Name, dogDto.Weight, dogDto.ActivityLevel, userId);
+                _dogService.CalculateCalories(dog);
                 _context.Dogs.Add(dog);
 
             }
             else
             {
-                var dogInDb = _context.Dogs.Find(dog.Id);
+                var dogInDbByName = usersDogs.Where(e => e.Name == dogDto.Name).FirstOrDefault();
+                dog = _dogService.AddOrEditDog(dogInDbByName.Id, dogDto.Name, dogDto.Weight, dogDto.ActivityLevel, userId);
+                _dogService.CalculateCalories(dog);
+                var dogInDb = usersDogs.Where(e => e.Name == dogDto.Name).FirstOrDefault();
 
                 if (dogInDb == null)
                     return new JsonResult(NotFound());
@@ -69,26 +69,36 @@ namespace DogCalApi.Controllers
         }
         [Authorize]
         [HttpGet]
-        public JsonResult Get(int id)
+        public JsonResult GetMyDogs()
         {
-            var result = _context.Dogs.Find(id);
+            var userClaims = User.Claims.ToList();
+            var userNameClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).ToString();
+            int userId= userNameClaim[userNameClaim.Length - 1] - '0';
 
-            if (result == null)
-                return new JsonResult(NotFound());
+            var results = _context.Dogs.ToList()
+                .Where(e => e.OwnerId == userId);
+            if (results.Any())
+                return new JsonResult(Ok(results));
 
-            return new JsonResult(Ok(result));
+            return new JsonResult(NotFound("No Dogs Found"));
         }
-
+        [Authorize]
         [HttpDelete]
-        public JsonResult Delete(int id)
+        public JsonResult Delete(string name)
         {
-            var result = _context.Dogs.Find(id);
+            var userClaims = User.Claims.ToList();
+            var userNameClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).ToString();
+            int userId = userNameClaim[userNameClaim.Length - 1] - '0';
+            var usersDogs = _context.Dogs.ToList().Where(e => e.OwnerId == userId);
+            var dogInDb = usersDogs.Where(e => e.Name == name).FirstOrDefault();
+
+            var result = dogInDb;
             if (result == null)
                 return new JsonResult(NotFound());
             _context.Dogs.Remove(result);
             _context.SaveChanges();
 
-            return new JsonResult(NoContent());
+            return new JsonResult(Ok($"Dog named {name} removed"));
         }
         [Authorize(Roles = "1")]
         [HttpGet]
