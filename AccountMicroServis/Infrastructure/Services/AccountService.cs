@@ -52,11 +52,8 @@ namespace Infrastructure.Services
                          signingCredentials: cred);
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var dupa = tokenHandler.WriteToken(token);
-            var dupa1 = tokenHandler.ReadToken(dupa);
-
-
-            return dupa;
+           
+            return tokenHandler.WriteToken(token);
 
         }
     }
