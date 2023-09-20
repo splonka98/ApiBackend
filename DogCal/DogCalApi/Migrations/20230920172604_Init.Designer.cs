@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DogCalApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230909161406_Init")]
+    [Migration("20230920172604_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -43,6 +43,9 @@ namespace DogCalApi.Migrations
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
+
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Weight")
                         .HasColumnType("int");

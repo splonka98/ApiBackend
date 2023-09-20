@@ -31,8 +31,9 @@ namespace DogCalApi.Controllers
         }
         [Authorize]
         [HttpPost]
-        public JsonResult CreateEdit(AddEditDogDto dogDto)
+        public JsonResult Create(AddEditDogDto dogDto)
         {
+
             var userClaims = User.Claims.ToList();
             var userNameClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).ToString();
             int userId = userNameClaim[userNameClaim.Length - 1] - '0';
@@ -55,8 +56,8 @@ namespace DogCalApi.Controllers
                 var dogInDbByName = usersDogs.Where(e => e.Name == dogDto.Name).FirstOrDefault();
                 dog = _dogService.AddOrEditDog(dogInDbByName.Id, dogDto.Name, dogDto.Weight, dogDto.ActivityLevel, userId);
                 _dogService.CalculateCalories(dog);
-                var dogInDb = usersDogs.Where(e => e.Name == dogDto.Name).FirstOrDefault();
-
+                var dogInDb = _context.Dogs.FirstOrDefault(e=> e.Id == dogInDbByName.Id);
+                
                 if (dogInDb == null)
                     return new JsonResult(NotFound());
 
@@ -67,6 +68,8 @@ namespace DogCalApi.Controllers
 
             return new JsonResult(Ok(dog));
         }
+
+
         [Authorize]
         [HttpGet]
         public JsonResult GetMyDogs()

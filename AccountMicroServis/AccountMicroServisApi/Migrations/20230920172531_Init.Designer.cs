@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccountMicroServisApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230913182825_init1")]
-    partial class init1
+    [Migration("20230920172531_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

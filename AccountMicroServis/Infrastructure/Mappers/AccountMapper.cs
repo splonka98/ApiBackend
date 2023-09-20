@@ -14,7 +14,7 @@ namespace Infrastructure.Mappers
         {
             return new UserEntitie()
             {
-                UserId = user.Id,
+                UserId = user.UserId,
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -27,7 +27,7 @@ namespace Infrastructure.Mappers
         {
             return new User()
             {
-                Id = userEntitie.RoleId,
+                UserId = userEntitie.UserId,
                 Email = userEntitie.Email,
                 FirstName = userEntitie.FirstName,
                 LastName = userEntitie.LastName,

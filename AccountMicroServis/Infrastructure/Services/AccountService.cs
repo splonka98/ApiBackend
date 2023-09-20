@@ -37,7 +37,7 @@ namespace Infrastructure.Services
         {
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, User.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, User.UserId.ToString()),
                 new Claim(ClaimTypes.Role, $"{User.RoleId}"),
 
             };

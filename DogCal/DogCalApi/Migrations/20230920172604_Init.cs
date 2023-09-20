@@ -19,7 +19,8 @@ namespace DogCalApi.Migrations
                     Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Weight = table.Column<int>(type: "int", nullable: false),
                     ActivityLevel = table.Column<int>(type: "int", nullable: false),
-                    CalorieNeed = table.Column<int>(type: "int", nullable: true)
+                    CalorieNeed = table.Column<int>(type: "int", nullable: true),
+                    OwnerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
